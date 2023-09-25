@@ -32,6 +32,7 @@ docker run -d --name dam_httpd -p 8000:80 -v /home/dam2/Documentos/sxe/tarea2/Tr
 ```
 
 5. Realiza un 'hola mundo' en html y comprueba que accedes desde el navegador.
+Dentro del directorio que creamos antes, **htdocs**, creamos nuestro archivo .html y para acceder desde el navegor escribimos nuestra **IP:puertoHost/hola.html** (http://10.0.9.14:8000/hola.html)
 6. Crea un volumen para este mismo fin.
 7. Crea un contenedor 'dam_web1' que use este volumen para el 'htdocs'
 8. Utiliza Code para hacer un hola mundo en html
