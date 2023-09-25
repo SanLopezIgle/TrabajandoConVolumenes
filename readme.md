@@ -10,9 +10,26 @@ docker image ls
 docker run -dit --name dam_httpd httpd:2.4
 ```
 3. Mapea el puerto 80 del contenedor con el puerto 8000 de tu máquina.
+
+Primero tenemos que parar y borrar el contenedor anterior ya que después de crearlo ya no hay forma de mapear los puertos.
+```
+docker stop dam_httpd
+docker rm dam_httpd
+docker run -d --name dam_httpd -p 8000:80 httpd:2.4
+```
+
 4. Utiliza bind mount para que el directorio del apache2 'htdocs' este montado un directorio que tu elijas.
 
         Utiliza -v "$PWD"/htdocs:/usr/local/apache2/htdocs/
+
+Primero creamos el repositorio que queremos:
+```
+mkdir htdocs
+```
+Para mapear los directorios ponemos esto (primero paramos y borramos el contenedor como hicimos antes)
+```
+docker run -d --name dam_httpd -p 8000:80 -v /home/dam2/Documentos/sxe/tarea2/TrabajandoConVolumenes/htdocs:/usr/local/apache2/htdocs httpd:2.4
+```
 
 5. Realiza un 'hola mundo' en html y comprueba que accedes desde el navegador.
 6. Crea un volumen para este mismo fin.
