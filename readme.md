@@ -5,19 +5,22 @@
 docker pull httpd
 docker image ls
 ```
-2. Crea un contenedor con el nombre 'dam_httpd'.
+2. Crea un contenedor con el nombre 'dam_web1'.
 ```
-docker run -dit --name dam_httpd httpd:2.4
+docker run -dit --name dam_web1 httpd:2.4
 ```
-3. Mapea el puerto 80 del contenedor con el puerto 8000 de tu máquina.
+3. Si quieres poder acceder desde el navegador de tu equipo, ¿qué debes hacer?
 
-Primero tenemos que parar y borrar el contenedor anterior ya que después de crearlo ya no hay forma de mapear los puertos.
+Primero paro y borro el contenedor creado antes y vuelvo a crearlo mapeando los puertos para poder acceder desde el navegador.
 ```
-docker stop dam_httpd
-docker rm dam_httpd
-docker run -d --name dam_httpd -p 8000:80 httpd:2.4
+docker stop dam_web1
+docker rm dam_web1
+docker run -d --name dam_web1 -p 8000:80 httpd:2.4
 ```
-
+**En el navegador:**
+```
+IP:puertoHost (10.0.9.14:8000)
+```
 4. Utiliza bind mount para que el directorio del apache2 'htdocs' este montado un directorio que tu elijas.
 
         Utiliza -v "$PWD"/htdocs:/usr/local/apache2/htdocs/
@@ -32,12 +35,22 @@ docker run -d --name dam_httpd -p 8000:80 -v /home/dam2/Documentos/sxe/tarea2/Tr
 ```
 
 5. Realiza un 'hola mundo' en html y comprueba que accedes desde el navegador.
-Dentro del directorio que creamos antes, **htdocs**, creamos nuestro archivo .html y para acceder desde el navegor escribimos nuestra **IP:puertoHost/hola.html** (http://10.0.9.14:8000/hola.html)
-6. Crea un volumen para este mismo fin.
-7. Crea un contenedor 'dam_web1' que use este volumen para el 'htdocs'
-8. Utiliza Code para hacer un hola mundo en html
-9. Crea otro contenedor 'dam_web2' con el mismo volumen y a otro puerto, por ejemplo 9080.
-10. Comprueba que los dos servidores 'sirven' la misma página, es decir, cuando consultamos en el navegador:
-        http://localhost:9080 
-        http://localhost:8000
-11. Tienen que salir la misma página web
+
+Dentro del directorio que creamos antes, **htdocs**, creamos nuestro archivo .html y para acceder desde el navegor escribimos: 
+
+**IP:puertoHost/hola.html** (http://10.0.9.14:8000/hola.html)
+
+6. Crea otro contenedor 'dam_web2' con el mismo volumen y a otro puerto, por ejemplo 9080.
+```
+docker run -d --name dam_httpd -p 9080:80 -v /home/dam2/Documentos/sxe/tarea2/TrabajandoConVolumenes/htdocs:/usr/local/apache2/htdocs httpd:2.4
+```
+7. Comprueba que los dos servidores 'sirven' la misma página, es decir, cuando consultamos en el navegador:
+
+    http://localhost:9080
+
+    http://localhost:8000
+
+8. Realiza modificaciones de la página y comprueba que los dos servidores 'sirven' la misma página
+
+
+
