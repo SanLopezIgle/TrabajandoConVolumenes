@@ -52,5 +52,7 @@ docker run -d --name dam_httpd -p 9080:80 -v /home/dam2/Documentos/sxe/tarea2/Tr
 
 8. Realiza modificaciones de la página y comprueba que los dos servidores 'sirven' la misma página
 
+Modifique el **html** y sigue funcionando como antes, cuando accedo a los dos enlaces anteriores me aparece lo mismo en ambos
+
 
 
